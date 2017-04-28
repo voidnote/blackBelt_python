@@ -17,13 +17,15 @@
         {% csrf_token %}
         <label for='name'>Name:</label>
         <input type='text' id='name' name='name'><br>
-        <label for='username'>Username:</label>
-        <input type='text' id='username' name='username'><br>
+        <label for='email'>Email:</label>
+        <input type='text' id='email' name='email'><br>
         <label for='password'>Password:</label>
         <input type='password' id='password' name='password'><br>
         <label for='pw_confirm'>Confirmation:</label>
         <input type='password' for='pw_confirm' name='pw_confirm'>
         <p>* password should be at least 8 characters long</p>
+        <label for='date_of_birth'>Date of Birth:</label>
+        <input type='date' id='date_of_birth' name='date_of_birth'>
         <input type='submit' value='Register'>
     </form>
     </fieldset>
@@ -31,8 +33,8 @@
     <legend>Login</legend>   
     <form action='{% url "login:process" route="login" %}' method='post'>
         {% csrf_token %}
-        <label for='username'>Username:</label>
-        <input type='text' id='username' name='username'><br>
+        <label for='email'>Email:</label>
+        <input type='text' id='email' name='email'><br>
         <label for='password'>Password:</label>
         <input type='password' id='password' name='password'>
         <input type='submit' value='Login'>

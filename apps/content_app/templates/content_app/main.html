@@ -5,6 +5,72 @@
         <title></title>
     </head>
     <body>
-        <h1>Hello {{ this_user }}</h1>
+
+        <a href="{% url 'login:logout' %}">Logout</a>
+    
+        <h1>Hello {{ this_user.name }}!</h1>
+        <p>Here are your appointments for today, {{ today }}:</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Tasks</th>
+                    <th>Time</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in appts_today %}
+                <tr>
+                    <td>{{ item.task }}</td>
+                    <td>{{ item.time }}</td>
+                    <td>{{ item.status }}</td>
+                   <td>
+                       {% if item.status != "done" %}
+                       <a href="{% url 'content:edit' apptid=item.id %}">Edit</a>
+                       <a href="{% url 'content:delete' apptid=item.id %}">Delete</a>
+                       {% endif %}
+                   </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <p>Your other appointments:</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Tasks</th>
+                    <th>Date</th>
+                    <th>Time</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in other_appt %}
+                <tr>
+                    <td>{{ item.task }}</td>
+                    <td>{{ item.date }}</td>
+                    <td>{{ item.time }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <p>Add Appointment</p>
+
+        {% for message in messages %}
+        <p>{{ message }}<p>
+        {% endfor %}
+        
+        <form action='{% url "content:process" userid=this_user.id %}' method='post'>
+            {% csrf_token %}
+            <label for='date'>Date:</label>
+            <input type='date' id='date' name='date'><br>
+            <label for='time'>Time: </label>
+            <input type='time' id='time' name='time'><br>
+            <label for='task'>Task:</label>
+            <input type='text' id='task' name='task'><br>
+            <input type='submit' value='Add'>
+        </form>
     </body>
 </html>

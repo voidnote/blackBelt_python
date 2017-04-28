@@ -1,8 +1,7 @@
 from django.contrib import admin
+from .models import User
+from ..content_app.models import Appt
 
-# from .models import Author, Genre, Book, BookInstance
+admin.site.register(User)
+admin.site.register(Appt)
 
-# admin.site.register(Book)
-# admin.site.register(Author)
-# admin.site.register(Genre)
-# admin.site.register(BookInstance)

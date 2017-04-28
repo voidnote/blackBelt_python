@@ -8,7 +8,6 @@ def index(request):
 
 def process(request, route):
 	if request.method == "POST":
-		# this brings in the value of response_to_views
 		if route == "register":
 			response_from_models = User.objects.validateUser(request.POST)
 		elif route == "login":
